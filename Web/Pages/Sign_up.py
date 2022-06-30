@@ -15,8 +15,12 @@ class SignUp_function:
         self.birthdayField_day = SignUpLocators.birthdayField_day
         self.birthdayField_month = SignUpLocators.birthdayField_month
         self.birthdayField_years = SignUpLocators.birthdayField_year
-        self.genderField = SignUpLocators.genderField
+        self.genderField_female = SignUpLocators.genderField_female
+        self.genderField_male = SignUpLocators.genderField_male
+        self.genderField_custom = SignUpLocators.genderField_custom
         self.signUpButton = SignUpLocators.signUpButton
+        self.resultMessage = SignUpLocators.resultMessage
+        self.BodyPronounField = SignUpLocators.BodyPronounField
 
     def creating_a_new_account(self):
         self.driver.find_element(By.XPATH,"//a[contains(text(),'יצירת חשבון חדש')]").click()
@@ -45,8 +49,20 @@ class SignUp_function:
         if field == 'year':
             return self.driver.find_element(By.ID, self.birthdayField_years)
 
-    def selectGender(self):
-        self.driver.find_element(By.NAME, self.genderField).click()
+    def selectGender(self, gender):
+        if gender == "female":
+            self.driver.find_element(By.CLASS_NAME, self.genderField_female).click()
+        if gender == "male":
+            self.driver.find_element(By.CSS_SELECTOR, self.genderField_male).click()
+        if gender == "custom":
+            self.driver.find_element(By.CSS_SELECTOR, self.genderField_custom).click()
+
+    def selectBodyPronounField(self,x):
+        if x == "y":
+            return self.driver.find_element(By.XPATH, self.BodyPronounField)
 
     def clickOnSignUpButton(self):
         self.driver.find_element(By.NAME, self.signUpButton).click()
+
+    def resultMessageSuccess(self):
+        return self.driver.find_element(By.NAME, self.resultMessage).get_attribute("innerText")
