@@ -26,8 +26,8 @@ class SignUp_function:
         self.driver.find_element(By.XPATH,"//a[contains(text(),'יצירת חשבון חדש')]").click()
 
 
-    def enter_name(self ):
-        self.driver.find_element(By.NAME, self.first_nameField).send_keys()
+    def enter_name(self,name):
+        self.driver.find_element(By.NAME, self.first_nameField).send_keys(name)
 
     def enter_lastName(self, lastname):
         self.driver.find_element(By.NAME, self.last_nameField).send_keys(lastname)
@@ -68,5 +68,5 @@ class SignUp_function:
         return self.driver.find_element(By.NAME, self.resultMessage).get_attribute("innerText")
 
     def resultMessageUnsuccess_firstName(self):
-        return self.driver.find_element(By.XPATH, "//body[1]/div[6]/div[1]/div[1]/div[1]").get_attribute("innerText")
+        return self.driver.find_element(By.CSS_SELECTOR, "#js_ez").get_attribute("innerText")
 
